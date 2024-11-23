@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
-// TODO: Login route
-
+// Login route
+router.use("login", require("./login"));
 // Node route
 router.use("nodes", require("./node"));
 
