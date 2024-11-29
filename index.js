@@ -1,6 +1,9 @@
 const express = require("express");
 const app = express();
 
+// Middlewares
+const Middlewares = require('./middlewares/index.js');
+
 // Setup env variables
 const dotenv = require("dotenv");
 dotenv.config();
@@ -30,4 +33,5 @@ app.get("/sync", async (req, res) => {
 });
 
 // Base router
-app.use("/api", require("./routes"));
+app.use("/api", Middlewares.userExists, require("./routes"));
+app.use(Middlewares.errorMiddleware);
