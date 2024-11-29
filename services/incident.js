@@ -1,4 +1,3 @@
-const { getStuckUsersFromIncident } = require("../controllers/incident");
 const { Incident } = require("../models");
 
 const createIncident = async (node, building, extras) => {

@@ -14,6 +14,8 @@ const handleCaughtFire = async (nodeId, data) => {
     );
     if (incident && incident.isActive) {
         // TODO: Mark the node as on fire on Firebase
+        // Buildings, building id, fire nodes, push
+        // buildings, building id, nodes, nodeid, onfire ->true 
         return;
     }
 

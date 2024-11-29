@@ -7,7 +7,7 @@ const userExists = async (req, res, next) => {
 		if (!token) throw "No token provided!";
 
 		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
-		const user = await User.findByPk(decodedToken.id);
+		const user = await User.findByPk(decodedToken.uid);
 		if (!user) throw "User does not exist";
 
 		req.user = user;
