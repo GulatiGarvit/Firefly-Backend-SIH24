@@ -1,8 +1,13 @@
+const { HttpError } = require("../config/http.js");
+
 const errorMiddleware = (err, req, res, next) => {
-	console.log(err.message);
+	if (err instanceof HttpError) {
+	} else {
+		console.log(err.message);
+	}
 	res.status(err.statusCode || 500).json({
 		reason: err.message,
-		stack: process.env.NODE_ENV === "development" ? err.stack : "🥞",
+		stack: err.stack,
 	});
 };
 

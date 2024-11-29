@@ -8,8 +8,7 @@ const firefighterExists = async (req, res, next) => {
 
         const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
         const firefighter = await Firefighter.findByPk(decodedToken.uid);
-        if (!firefighter) throw "Firefighter does not exist";
-
+        if (!firefighter) next(new HttpError(404, "Firefighter not found!")); 
         req.firefighter = firefighter;
         return next();
     } catch (e) {

@@ -1,4 +1,5 @@
 const firebaseAdmin = require("../config/firebase");
+const { HttpError } = require("../config/http");
 const { User } = require("../models/index");
 
 const userExists = async (req, res, next) => {
@@ -8,7 +9,7 @@ const userExists = async (req, res, next) => {
 
 		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
 		const user = await User.findByPk(decodedToken.uid);
-		if (!user) throw "User does not exist";
+		if (!user) next(new HttpError(404, "User not found!"));
 
 		req.user = user;
 		return next();
