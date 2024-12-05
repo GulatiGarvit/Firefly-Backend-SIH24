@@ -5,7 +5,6 @@ const UserController = require("../controllers/user");
 const Middlewares = require("../middlewares");
 
 router.post("/", UserController.registerUser);
-router.use(Middlewares.userExists);
-router.get("/", UserController.getUser);
+router.get("/", Middlewares.userExists, UserController.getUser);
 
 module.exports = router;
