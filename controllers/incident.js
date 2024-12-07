@@ -57,15 +57,6 @@ const getUsersInsideBuildingFromIncident = async (req, res) => {
 	res.status(200).json({ users });
 };
 
-/* 🚀 Frontend Request
-Users[] -> containing users Id
-& Incident_ID
-
-⛑️ Response : {
-users : // list of users metadata
-incident : // all info regarding incident
-}
-*/
 const getUsersAndIncidentInfo = async (req, res) => {
 	const userIds = req.body.users;
 	const incidentId = req.body.incident;
