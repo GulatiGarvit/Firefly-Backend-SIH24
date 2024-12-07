@@ -1,6 +1,7 @@
 // BLE Node
 const sequelize = require("../config/database");
 const { DataTypes } = require("sequelize");
+const { POI } = require("../config/enums");
 
 const Node = sequelize.define("node", {
     id: {
@@ -12,6 +13,11 @@ const Node = sequelize.define("node", {
         type: DataTypes.GEOMETRY("POINT"),
         allowNull: false,
     },
-}, );
+    poi: {
+        type: DataTypes.ENUM(Object.values(POI)),
+        allowNull: false,
+        defaultValue: POI.NONE.toString(),
+    },
+});
 
 module.exports = Node;
