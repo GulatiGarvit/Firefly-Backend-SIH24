@@ -12,13 +12,27 @@ const handleCaughtFire = async (req, res, next) => {
 };
 
 const getAllNodesForBuilding = async (req, res, next) => {
-    const buildingId = req.params.id;
+    const buildingId = req.params.buildingId;
     const nodes = await NodeService.getAllNodesForBuilding(buildingId);
 
     res.status(200).json({ nodes });
 };
 
+const createNodesInBulk = async (req, res, next) => {
+    try {
+        const buildingId = req.params.buildingId;
+        const nodes = req.body.nodes;
+
+        await NodeService.createNodesInBulk(buildingId, nodes);
+
+        res.status(201).json({ message: "Nodes created" });
+    } catch (error) {
+        next(error);
+    }
+};
+
 module.exports = {
     handleCaughtFire,
     getAllNodesForBuilding,
+    createNodesInBulk,
 };

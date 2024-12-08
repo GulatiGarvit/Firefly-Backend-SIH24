@@ -7,7 +7,7 @@ router.use("/user", require("./user"));
 router.use("/firefighter", require("./firefighter"));
 
 // Node route
-router.use("/nodes", require("./node"));
+router.use("/building", require("./building"));
 
 // Incident route
 router.use("/incident", require("./incident"));
