@@ -14,7 +14,10 @@ const registerFirefighter = async (req, res, next) => {
 	const { name, age, phoneNumber, email, fcmToken } = req.body;
 	var uid;
 	try {
-		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+		const firebaseAuthToken = req.headers.authorization.substring(7);
+		const decodedToken = await firebaseAdmin
+			.auth()
+			.verifyIdToken(firebaseAuthToken);
 		uid = decodedToken.uid;
 	} catch (e) {
 		return res.status(403).json({ message: "Invalid token" });

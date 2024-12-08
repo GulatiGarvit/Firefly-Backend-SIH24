@@ -11,10 +11,13 @@ const getFireStation = async (req, res, next) => {
 };
 
 const registerFireStation = async (req, res, next) => {
-	const { name, phoneNumber, address, email, latlng, fcmToken } = req.body;
+	const { name, phoneNumber, address, email, lat, lng, fcmToken } = req.body;
 	var uid;
 	try {
-		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+		const firebaseAuthToken = req.headers.authorization.substring(7);
+		const decodedToken = await firebaseAdmin
+			.auth()
+			.verifyIdToken(firebaseAuthToken);
 		uid = decodedToken.uid;
 	} catch (e) {
 		return res.status(403).json({ message: "Invalid token" });
@@ -26,7 +29,10 @@ const registerFireStation = async (req, res, next) => {
 			phoneNumber,
 			address,
 			email,
-			latlng,
+			latlng: {
+				type: "Point",
+				coordinates: [lng, lat],
+			},
 			fcmToken,
 		});
 		return res.status(200).json({ firestation: fire_station });
@@ -36,7 +42,7 @@ const registerFireStation = async (req, res, next) => {
 };
 
 const updateFireStation = async (req, res, next) => {
-	const { name, phoneNumber, address, email, latlng, fcmToken } = req.body;
+	const { name, phoneNumber, address, email, lat, lng, fcmToken } = req.body;
 	const fire_station = req.fire_station;
 	try {
 		const updatedFireStation = await fire_station.update({
@@ -44,13 +50,16 @@ const updateFireStation = async (req, res, next) => {
 			phoneNumber,
 			address,
 			email,
-			latlng,
+			latlng: {
+				type: "Point",
+				coordinates: [lng, lat],
+			},
 			fcmToken,
 		});
 		return res.status(200).json({ firestation: updatedFireStation });
 	} catch (e) {
 		next(e);
 	}
-}
+};
 
 module.exports = { getFireStation, registerFireStation, updateFireStation };
