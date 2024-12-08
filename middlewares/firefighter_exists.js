@@ -1,5 +1,6 @@
 const firebaseAdmin = require("../config/firebase");
 const { Firefighter } = require("../models/index");
+const { HttpError } = require("../config/http");
 
 const firefighterExists = async (req, res, next) => {
     const token = req.headers.authorization;

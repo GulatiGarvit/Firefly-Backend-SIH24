@@ -1,5 +1,6 @@
 const firebaseAdmin = require("../config/firebase");
 const { FireStation } = require("../models/index");
+const { HttpError } = require("../config/http");
 
 const fireStationExists = async (req, res, next) => {
 	const token = req.headers.authorization;
@@ -8,7 +9,8 @@ const fireStationExists = async (req, res, next) => {
 
 		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
 		const fire_station = await FireStation.findByPk(decodedToken.uid);
-		if (!fire_station) return next(new HttpError(404, "Fire Station not found!"));
+		if (!fire_station)
+			return next(new HttpError(404, "Fire Station not found!"));
 		req.fire_station = fire_station;
 		return next();
 	} catch (e) {
