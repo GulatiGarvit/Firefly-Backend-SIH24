@@ -52,8 +52,11 @@ const getAllNodesForBuilding = async (buildingId) => {
 const createNodesInBulk = async (buildingId, nodes) => {
     nodes = nodes.split("\n");
     nodes = nodes.map((node) => {
-        return node.split(",");
+        // Split the string by comma and convert to float
+        return node.split(",").map((n) => parseFloat(n));
     });
+
+    console.log(nodes);
 
     for (let node in nodes) {
         await Node.create({
