@@ -13,6 +13,6 @@ router.use("/building", require("./building"));
 router.use("/incident", require("./incident"));
 
 // Fire station route
-router.use("/firestation", require("./fire_station"));
+router.use("/fire_station", require("./fire_station"));
 
 module.exports = router;
