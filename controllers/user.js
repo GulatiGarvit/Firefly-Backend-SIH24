@@ -13,7 +13,7 @@ const getUser = async (req, res) => {
 	}
 };
 
-const registerUser = async (req, res) => {
+const registerUser = async (req, res, next) => {
 	// If this controller is called, the user does not exit
 	// Use this function to register the user
 	const { name, age, medicalConditions, fcmToken } = req.body;
@@ -44,7 +44,7 @@ const registerUser = async (req, res) => {
 	}
 };
 
-const updateUser = async (req, res) => {
+const updateUser = async (req, res, next) => {
 	const user = req.user;
 	try {
 		const updatedUser = await user.update(req.body);
