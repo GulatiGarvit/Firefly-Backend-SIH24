@@ -55,10 +55,7 @@ const createNodesInBulk = async (buildingId, nodes) => {
         // Split the string by comma and convert to float
         return node.split(",").map((n) => parseFloat(n));
     });
-
-    console.log(nodes);
-
-    for (let node in nodes) {
+    for (let node of nodes) {
         await Node.create({
             buildingId,
             latlng: { type: "Point", coordinates: node },
