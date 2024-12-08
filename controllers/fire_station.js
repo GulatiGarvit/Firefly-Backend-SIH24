@@ -14,7 +14,7 @@ const registerFireStation = async (req, res, next) => {
 	const { name, phoneNumber, address, email, lat, lng, fcmToken } = req.body;
 	var uid;
 	try {
-		const firebaseAuthToken = req.headers.authorization.substring(7);
+		const firebaseAuthToken = req.headers.authorization;
 		const decodedToken = await firebaseAdmin
 			.auth()
 			.verifyIdToken(firebaseAuthToken);

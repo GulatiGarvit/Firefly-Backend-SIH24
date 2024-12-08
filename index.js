@@ -19,7 +19,7 @@ app.use(express.json());
 
 // Database connection
 sequelize
-	.sync({ force: true })
+	.authenticate()
 	.then(() => {
 		console.log("Connection has been established successfully.");
 

@@ -3,13 +3,13 @@ const { HttpError } = require("../config/http");
 const { User } = require("../models/index");
 
 const userExists = async (req, res, next) => {
-	const token = req.headers.authorization.substring(7);
+	const token = req.headers.authorization;
 	try {
 		if (!token) throw "No token provided!";
 
 		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
 		const user = await User.findByPk(decodedToken.uid);
-		if (!user) next(new HttpError(404, "User not found!"));
+		if (!user) return next(new HttpError(404, "User not found!"));
 
 		req.user = user;
 		return next();

@@ -14,7 +14,7 @@ const registerFirefighter = async (req, res, next) => {
 	const { name, age, phoneNumber, email, fcmToken } = req.body;
 	var uid;
 	try {
-		const firebaseAuthToken = req.headers.authorization.substring(7);
+		const firebaseAuthToken = req.headers.authorization;
 		const decodedToken = await firebaseAdmin
 			.auth()
 			.verifyIdToken(firebaseAuthToken);

@@ -22,7 +22,7 @@ const registerUser = async (req, res, next) => {
 	}
 	var uid;
 	try {
-		const firebaseAuthToken = req.headers.authorization.substring(7);
+		const firebaseAuthToken = req.headers.authorization;
 		const decodedToken = await firebaseAdmin
 			.auth()
 			.verifyIdToken(firebaseAuthToken);

@@ -5,7 +5,7 @@ const Firefighter = sequelize.define(
     "firefighter",
     {
         id: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             primaryKey: true,
         },
         name: {
