@@ -22,7 +22,10 @@ const registerUser = async (req, res) => {
 	}
 	var uid;
 	try {
-		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+		const firebaseAuthToken = req.headers.authorization.substring(7);
+		const decodedToken = await firebaseAdmin
+			.auth()
+			.verifyIdToken(firebaseAuthToken);
 		uid = decodedToken.uid;
 	} catch (e) {
 		return res.status(403).json({ message: "Invalid token" });
@@ -42,15 +45,9 @@ const registerUser = async (req, res) => {
 };
 
 const updateUser = async (req, res) => {
-	const { name, age, medicalConditions, fcmToken } = req.body;
 	const user = req.user;
 	try {
-		const updatedUser = await user.update({
-			name,
-			age,
-			medicalConditions,
-			fcmToken,
-		});
+		const updatedUser = await user.update(req.body);
 		return res.status(200).json({ user: updatedUser });
 	} catch (e) {
 		next(e);
