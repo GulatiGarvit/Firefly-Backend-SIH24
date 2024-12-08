@@ -66,4 +66,5 @@ const createNodesInBulk = async (buildingId, nodes) => {
 module.exports = {
     handleCaughtFire,
     createNodesInBulk,
+    getAllNodesForBuilding,
 };
