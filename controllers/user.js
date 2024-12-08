@@ -1,4 +1,5 @@
 const { User } = require("../models/index");
+const firebaseAdmin = require("../config/firebase");
 
 const getUser = async (req, res) => {
 	// If this controller is called, the user already passed jwt authentication middleware
@@ -18,8 +19,16 @@ const registerUser = async (req, res) => {
 	if (!name || !age) {
 		return res.status(400).json({ message: "Name and age are required" });
 	}
+	var uid;
+	try {
+		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+		uid = decodedToken.uid;
+	} catch (e) {
+		return res.status(403).json({ message: "Invalid token" });
+	}
 	try {
 		const user = await User.create({
+			id: uid,
 			name,
 			age,
 			medicalConditions,

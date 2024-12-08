@@ -14,6 +14,9 @@ const { User, sequelize } = require("./models");
 const cors = require("cors");
 app.use(cors());
 
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
 // Database connection
 sequelize
 	.sync({ force: true })
