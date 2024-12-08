@@ -10,6 +10,10 @@ dotenv.config();
 
 const { User, sequelize } = require("./models");
 
+// Add cors
+const cors = require("cors");
+app.use(cors());
+
 // Database connection
 sequelize
 	.sync({ force: true })
