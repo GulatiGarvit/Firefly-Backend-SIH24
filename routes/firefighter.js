@@ -4,7 +4,10 @@ const Middlewares = require("../middlewares");
 const FirefighterController = require("../controllers/firefighter");
 
 router.post("/", FirefighterController.registerFirefighter);
+
 router.use(Middlewares.firefighterExists);
+
 router.get("/", FirefighterController.getFirefighter);
+router.patch("/", FirefighterController.updateFirefighter);
 
 module.exports = router;

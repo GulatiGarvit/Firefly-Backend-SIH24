@@ -1,4 +1,5 @@
 const { Firefighter } = require("../models/index");
+const firebaseAdmin = require("../config/firebase");
 
 const getFirefighter = async (req, res, next) => {
 	try {
@@ -11,8 +12,16 @@ const getFirefighter = async (req, res, next) => {
 
 const registerFirefighter = async (req, res, next) => {
 	const { name, age, phoneNumber, email, fcmToken } = req.body;
+	var uid;
+	try {
+		const decodedToken = await firebaseAdmin.auth().verifyIdToken(token);
+		uid = decodedToken.uid;
+	} catch (e) {
+		return res.status(403).json({ message: "Invalid token" });
+	}
 	try {
 		const firefighter = await Firefighter.create({
+			id: uid,
 			name,
 			age,
 			phoneNumber,
@@ -25,4 +34,21 @@ const registerFirefighter = async (req, res, next) => {
 	}
 };
 
-module.exports = { getFirefighter, registerFirefighter };
+const updateFirefighter = async (req, res, next) => {
+	const { name, age, phoneNumber, email, fcmToken } = req.body;
+	const firefighter = req.firefighter;
+	try {
+		const updatedFirefighter = await firefighter.update({
+			name,
+			age,
+			phoneNumber,
+			email,
+			fcmToken,
+		});
+		return res.status(200).json({ firefighter: updatedFirefighter });
+	} catch (e) {
+		next(e);
+	}
+};
+
+module.exports = { getFirefighter, registerFirefighter, updateFirefighter };

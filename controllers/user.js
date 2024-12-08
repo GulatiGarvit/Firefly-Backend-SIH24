@@ -1,5 +1,6 @@
 const { User } = require("../models/index");
 const firebaseAdmin = require("../config/firebase");
+const { updateFireStation } = require("./fire_station");
 
 const getUser = async (req, res) => {
 	// If this controller is called, the user already passed jwt authentication middleware
@@ -40,4 +41,20 @@ const registerUser = async (req, res) => {
 	}
 };
 
-module.exports = { getUser, registerUser };
+const updateUser = async (req, res) => {
+	const { name, age, medicalConditions, fcmToken } = req.body;
+	const user = req.user;
+	try {
+		const updatedUser = await user.update({
+			name,
+			age,
+			medicalConditions,
+			fcmToken,
+		});
+		return res.status(200).json({ user: updatedUser });
+	} catch (e) {
+		next(e);
+	}
+};
+
+module.exports = { getUser, registerUser, updateUser };
