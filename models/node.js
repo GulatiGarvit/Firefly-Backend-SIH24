@@ -18,6 +18,9 @@ const Node = sequelize.define("node", {
         allowNull: false,
         defaultValue: POI.NONE.toString(),
     },
+    name: {
+        type: DataTypes.STRING,
+    },
 });
 
 module.exports = Node;
