@@ -35,5 +35,5 @@ app.get("/sync", async (req, res) => {
 });
 
 // Base router
-app.use("/api", Middlewares.userExists, require("./routes"));
+app.use("/api", require("./routes"));
 app.use(Middlewares.errorMiddleware);
