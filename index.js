@@ -41,6 +41,12 @@ app.get("/sync", async (req, res) => {
 	res.send("Successfully Synced");
 });
 
+app.get("/sync-alter", async (req, res) => {
+	const sequelize = require("./config/database.js");
+	await sequelize.sync({ alter: true });
+	res.send("Successfully Synced");
+});
+
 // Base router
 app.use("/api", require("./routes"));
 app.use(Middlewares.errorMiddleware);
