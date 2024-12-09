@@ -4,7 +4,7 @@ const firebaseAdmin = require("../config/firebase");
 const getFireStation = async (req, res, next) => {
 	try {
 		const fire_station = req.fire_station;
-		return res.status(200).json({ firestation: fire_station });
+		return res.status(200).json({ data: fire_station });
 	} catch (e) {
 		next(e);
 	}
@@ -35,14 +35,14 @@ const registerFireStation = async (req, res, next) => {
 			},
 			fcmToken,
 		});
-		return res.status(200).json({ firestation: fire_station });
+		return res.status(200).json({ data: fire_station });
 	} catch (e) {
 		next(e);
 	}
 };
 
 const updateFireStation = async (req, res, next) => {
-	const { name, phoneNumber, address, email, lat, lng, fcmToken } = req.body;
+	const { name, phoneNumber, address, email, fcmToken } = req.body;
 	const fire_station = req.fire_station;
 	try {
 		const updatedFireStation = await fire_station.update({
@@ -50,13 +50,9 @@ const updateFireStation = async (req, res, next) => {
 			phoneNumber,
 			address,
 			email,
-			latlng: {
-				type: "Point",
-				coordinates: [lng, lat],
-			},
 			fcmToken,
 		});
-		return res.status(200).json({ firestation: updatedFireStation });
+		return res.status(200).json({ data: updatedFireStation });
 	} catch (e) {
 		next(e);
 	}

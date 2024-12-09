@@ -20,7 +20,7 @@ User.belongsTo(City);
 FireStation.hasMany(Firefighter);
 Firefighter.belongsTo(FireStation);
 
-FireStation.belongsTo(Firefighter, { as: "chief" });
+// FireStation.belongsTo(Firefighter, { as: "chief" });
 
 Building.hasMany(Incident);
 Incident.belongsTo(Building);
@@ -49,6 +49,10 @@ Node.belongsTo(Building);
 Node.hasMany(Incident);
 Incident.hasOne(Node);
 
+// Incident and firestation
+FireStation.hasMany(Incident);
+Incident.belongsTo(FireStation);
+
 module.exports = {
     User,
     City,
@@ -60,3 +64,4 @@ module.exports = {
     Node,
     sequelize,
 };
+

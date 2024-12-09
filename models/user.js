@@ -19,6 +19,10 @@ const User = sequelize.define(
 				min: 12,
 			},
 		},
+		gender: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
 		medicalConditions: {
 			type: DataTypes.STRING,
 			allowNull: true,

@@ -26,6 +26,9 @@ const FireStation = sequelize.define(
 			type: DataTypes.GEOMETRY("POINT"),
 			allowNull: false,
 		},
+		fcmToken: {
+			type: DataTypes.STRING,
+		},
 	},
 	{
 		underscored: true,

@@ -1,6 +1,7 @@
 const firebaseAdmin = require("../config/firebase");
 
 const sendNotification = async (token, message) => {
+	if(!token) return;
 	// TODO: Implement
 	try {
 		const payload = {

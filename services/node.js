@@ -12,7 +12,7 @@ const handleCaughtFire = async (nodeId, data) => {
 	// Realtime Database
 	const db = firebaseAdmin.database();
 	// Get the latest incident for this building
-	const building = await IncidentService.getLatestIncidentByBuilding(
+	const incident = await IncidentService.getLatestIncidentByBuilding(
 		node.buildingId
 	);
 	if (incident && incident.isActive) {
@@ -21,21 +21,22 @@ const handleCaughtFire = async (nodeId, data) => {
 		await db
 			.ref(`Incidents/${incident.id}/Nodes/FireNodes/${nodeId}`)
 			.set(true);
-		return;
+		return incident;
 	}
 
 	// Create an incident
-	const incident = await IncidentService.createIncident(node, data);
+	const newIncident = await IncidentService.createIncident(node, node.buildingId, data);
 
 	await db
-		.ref(`Incidents/${incident.id}/Nodes/FireNodes/${nodeId}`)
+		.ref(`Incidents/${newIncident.id}/Nodes/FireNodes/${nodeId}`)
 		.set(true);
 
 	// Alert all users in the background
-	UserService.createAlertForIncident(incident);
+	UserService.createAlertForIncident(newIncident);
 
 	// Alert firestations in the background
-	FireStationService.createAlertForIncident(incident);
+	FireStationService.createAlertForIncident(newIncident);
+    return newIncident;
 };
 
 const getAllNodesForBuilding = async (buildingId) => {

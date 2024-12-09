@@ -6,9 +6,9 @@ const handleCaughtFire = async (req, res, next) => {
     // TODO: Get other data
     const data = {};
 
-    await NodeService.handleCaughtFire(nodeId, data);
+    incident = await NodeService.handleCaughtFire(nodeId, data);
 
-    res.status(200).json({ message: "Incident created" });
+    res.status(200).json({ incident: incident });
 };
 
 const getAllNodesForBuilding = async (req, res, next) => {

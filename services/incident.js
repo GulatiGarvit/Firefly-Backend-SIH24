@@ -1,9 +1,9 @@
 const { Incident } = require("../models");
 
-const createIncident = async (node, building, extras) => {
+const createIncident = async (node, buildingId, extras) => {
     const incident = await node.createIncident({
-        extras: data,
-        buildingId: building.id,
+        extras: extras,
+        buildingId: buildingId,
     });
     return incident;
 };

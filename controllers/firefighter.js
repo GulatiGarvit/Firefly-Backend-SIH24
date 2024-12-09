@@ -4,7 +4,7 @@ const firebaseAdmin = require("../config/firebase");
 const getFirefighter = async (req, res, next) => {
 	try {
 		const firefighter = req.firefighter;
-		return res.status(200).json({ firefighter: firefighter });
+		return res.status(200).json({ data: firefighter });
 	} catch (e) {
 		next(e);
 	}
@@ -31,7 +31,7 @@ const registerFirefighter = async (req, res, next) => {
 			email,
 			fcmToken,
 		});
-		return res.status(200).json({ firefighter: firefighter });
+		return res.status(200).json({ data: firefighter });
 	} catch (e) {
 		next(e);
 	}
@@ -48,7 +48,7 @@ const updateFirefighter = async (req, res, next) => {
 			email,
 			fcmToken,
 		});
-		return res.status(200).json({ firefighter: updatedFirefighter });
+		return res.status(200).json({ data: updatedFirefighter });
 	} catch (e) {
 		next(e);
 	}
