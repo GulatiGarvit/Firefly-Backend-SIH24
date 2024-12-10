@@ -58,4 +58,30 @@ const updateFireStation = async (req, res, next) => {
 	}
 };
 
-module.exports = { getFireStation, registerFireStation, updateFireStation };
+const getIncidentsForFireStation = async (req, res, next) => {
+	const fire_station = req.fire_station;
+	try {
+		const incidents = await fire_station.getIncidents();
+		return res.status(200).json({ data: incidents });
+	} catch (e) {
+		next(e);
+	}
+};
+
+const getFirefightersForFireStation = async (req, res, next) => {
+	const fire_station = req.fire_station;
+	try {
+		const firefighters = await fire_station.getFirefighters();
+		return res.status(200).json({ data: firefighters });
+	} catch (e) {
+		next(e);
+	}
+};
+
+module.exports = {
+	getFireStation,
+	registerFireStation,
+	updateFireStation,
+	getIncidentsForFireStation,
+	getFirefightersForFireStation,
+};

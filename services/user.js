@@ -14,15 +14,15 @@ const createAlertForIncident = async (incident) => {
 
 	// TODO: Formulate the message
 	const message = {
-		title: "Fire Alert 🚨",
-		body: "A fire has been detected in your building. Evacuate immediately.",
-        // Optional data
+		data: {
+			gotNewIncident: true,
+		},
+		// Send to all users in the city
+		tokens: users.map((user) => user.fcmToken),
 	};
 
 	// Notify all users
-	for (const user of users) {
-		await NotificationService.sendNotification(user.fcmToken, message);
-	}
+	await NotificationService.sendNotification(message);
 };
 
 module.exports = {

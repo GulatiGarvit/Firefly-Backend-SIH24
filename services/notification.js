@@ -1,40 +1,16 @@
+const { getMessaging } = require("firebase-admin/messaging");
 const firebaseAdmin = require("../config/firebase");
 
-const sendNotification = async (token, message) => {
-	if(!token) return;
+const sendNotification = async (message) => {
 	// TODO: Implement
-	try {
-		const payload = {
-			notification: {
-				title: message.title,
-				body: message.body,
-			},
-			data: message.data || {},
-		};
-
-		const response = await firebaseAdmin
-			.messaging()
-			.sendToDevice(token, payload);
-
-		if (response.failureCount > 0) {
-			response.results.forEach((result, index) => {
-				const error = result.error;
-				if (error) {
-					console.error(
-						"Failure sending notification to",
-						token,
-						error
-					);
-				}
-			});
-		} else {
-			console.log("Notification sent successfully to", token);
-		}
-		return response;
-	} catch (error) {
-		console.error("Error sending notification", error);
-		return error;
-	}
+	getMessaging
+		.send(message)
+		.then((response) => {
+			console.log("Successfully sent message:", response);
+		})
+		.catch((error) => {
+			console.log("Error sending message:", error);
+		});
 };
 
 module.exports = {
