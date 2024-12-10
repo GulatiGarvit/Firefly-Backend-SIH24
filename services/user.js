@@ -13,16 +13,14 @@ const createAlertForIncident = async (incident) => {
 	});
 
 	// TODO: Formulate the message
-	const message = {
-		data: {
-			gotNewIncident: true,
-		},
-		// Send to all users in the city
-		tokens: users.map((user) => user.fcmToken),
+	const data = {
+		gotNewIncident: true,
 	};
 
-	// Notify all users
-	await NotificationService.sendNotification(message);
+	// For each user in users send notif
+	for (let user of users) {
+		await NotificationService.sendNotification(user.fcmToken, data);
+	}
 };
 
 module.exports = {

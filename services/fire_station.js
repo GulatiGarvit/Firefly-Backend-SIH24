@@ -26,11 +26,8 @@ const createAlertForIncident = async (incident) => {
 	);
 
 	// TODO: Formulate the message
-	const message = {
-		data: {
-			gotNewIncident: true,
-		},
-		token: nearestFireStation[0].fcmToken,
+	const data = {
+		gotNewIncident: true,
 	};
 
 	// Notify the fire station's
@@ -39,7 +36,8 @@ const createAlertForIncident = async (incident) => {
 	console.log(incident.fireStationId);
 	await incident.save();
 	await NotificationService.sendNotification(
-		message
+		nearestFireStation[0].fcmToken,
+		data
 	);
 };
 

@@ -9,5 +9,6 @@ router.use(Middlewares.firefighterExists);
 
 router.get("/", FirefighterController.getFirefighter);
 router.patch("/", FirefighterController.updateFirefighter);
+router.get("/:firefighterId/incident", FirefighterController.getIncidentAssignedToFirefighter);
 
 module.exports = router;

@@ -1,8 +1,11 @@
 const { getMessaging } = require("firebase-admin/messaging");
 const firebaseAdmin = require("../config/firebase");
 
-const sendNotification = async (message) => {
-	// TODO: Implement
+const sendNotification = async (token, data) => {
+	const message = {
+		data: data,
+		token: token,
+	};
 	getMessaging
 		.send(message)
 		.then((response) => {

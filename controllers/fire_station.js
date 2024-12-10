@@ -78,10 +78,32 @@ const getFirefightersForFireStation = async (req, res, next) => {
 	}
 };
 
+const assignIncidentToFirefighter = async (req, res, next) => {
+	const { firefighterId, incidentId } = req.body;
+	const fire_station = req.fire_station;
+	try {
+		const firefighter = await fire_station.getFirefighter(firefighterId);
+		if (!firefighter) {
+			return res.status(404).json({ message: "Firefighter not found" });
+		}
+		const incident = await fire_station.getIncident(incidentId);
+		if (!incident) {
+			return res.status(404).json({ message: "Incident not found" });
+		}
+		await incident.setFirefighter(firefighter);
+		return res
+			.status(200)
+			.json({ message: "Incident assigned to firefighter" });
+	} catch (e) {
+		next(e);
+	}
+};
+
 module.exports = {
 	getFireStation,
 	registerFireStation,
 	updateFireStation,
 	getIncidentsForFireStation,
 	getFirefightersForFireStation,
+	assignIncidentToFirefighter,
 };

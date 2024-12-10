@@ -54,4 +54,23 @@ const updateFirefighter = async (req, res, next) => {
 	}
 };
 
-module.exports = { getFirefighter, registerFirefighter, updateFirefighter };
+const getIncidentAssignedToFirefighter = async (req, res, next) => {
+	const firefighter = req.firefighter;
+	try {
+		const incident = await firefighter.findOne({
+			where: {
+				isActive: true,
+			},
+		});
+		return res.status(200).json({ data: incident });
+	} catch (e) {
+		next(e);
+	}
+};
+
+module.exports = {
+	getFirefighter,
+	registerFirefighter,
+	updateFirefighter,
+	getIncidentAssignedToFirefighter,
+};
