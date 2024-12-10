@@ -36,8 +36,8 @@ Incident.belongsToMany(User, {
     otherKey: "userId",
 });
 
-Firefighter.belongsToMany(Incident, { through: "incident_firefighters" });
-Incident.belongsToMany(Firefighter, { through: "incident_firefighters" });
+Firefighter.hasMany(Incident);
+Incident.belongsTo(Firefighter);
 
 FireStation.hasMany(Incident);
 Incident.belongsTo(FireStation);
