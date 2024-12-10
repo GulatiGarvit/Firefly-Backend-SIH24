@@ -96,7 +96,7 @@ const assignIncidentToFirefighter = async (req, res, next) => {
         if (!incident) {
             return res.status(404).json({ message: "Incident not found" });
         }
-        await incident.setFirefighter(firefighter);
+        await incident.addFirefighter(firefighter);
         return res
             .status(200)
             .json({ message: "Incident assigned to firefighter" });
