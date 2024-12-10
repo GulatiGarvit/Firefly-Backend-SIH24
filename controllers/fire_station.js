@@ -1,5 +1,6 @@
 const { FireStation } = require("../models/index");
 const firebaseAdmin = require("../config/firebase");
+const NotificationService = require("../services/notification");
 
 const getFireStation = async (req, res, next) => {
 	try {
@@ -91,6 +92,10 @@ const assignIncidentToFirefighter = async (req, res, next) => {
 			return res.status(404).json({ message: "Incident not found" });
 		}
 		await incident.setFirefighter(firefighter);
+		const data = {
+			gotNewIncident: true,
+		};
+		NotificationService.sendNotification(firefighter.fcmToken, data);
 		return res
 			.status(200)
 			.json({ message: "Incident assigned to firefighter" });
