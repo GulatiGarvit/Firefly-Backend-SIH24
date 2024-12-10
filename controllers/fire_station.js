@@ -1,5 +1,6 @@
 const { FireStation } = require("../models/index");
 const firebaseAdmin = require("../config/firebase");
+const NotificationService = require("../services/notification");
 
 const getFireStation = async (req, res, next) => {
     try {
