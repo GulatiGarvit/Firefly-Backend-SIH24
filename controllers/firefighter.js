@@ -1,4 +1,4 @@
-const { Firefighter } = require("../models/index");
+const { Firefighter, Incident } = require("../models/index");
 const firebaseAdmin = require("../config/firebase");
 
 const getFirefighter = async (req, res, next) => {
@@ -59,10 +59,16 @@ const updateFirefighter = async (req, res, next) => {
 const getIncidentAssignedToFirefighter = async (req, res, next) => {
     const firefighter = req.firefighter;
     try {
-        const incident = await firefighter.findOne({
+        const incident = await Incident.findOne({
             where: {
                 isActive: true,
             },
+            include : {
+                model : Firefighter,
+                where  : {
+                     id : firefighter.id
+                }
+            }
         });
         return res.status(200).json({ data: incident });
     } catch (e) {
