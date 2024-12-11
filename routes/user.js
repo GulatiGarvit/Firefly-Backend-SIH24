@@ -11,4 +11,6 @@ router.use(Middlewares.userExists);
 router.get("/", UserController.getUser);
 router.patch("/", UserController.updateUser);
 
+router.post("/incident-confirm", UserController.confirmationForIncident);
+
 module.exports = router;
