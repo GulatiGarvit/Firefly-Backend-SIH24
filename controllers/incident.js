@@ -57,7 +57,7 @@ const getUsersInsideBuildingFromIncident = async (req, res) => {
 	res.status(200).json({ users });
 };
 
-const getUsersAndIncidentInfo = async (req, res) => {
+const getUsersInfo = async (req, res) => {
 	const userIds = req.body.users;
 
 	//for each userId, get user metadata
@@ -76,5 +76,5 @@ module.exports = {
 	getIncidentById,
 	getStuckUsersFromIncident,
 	getUsersInsideBuildingFromIncident,
-	getUsersAndIncidentInfo,
+	getUsersInfo,
 };
