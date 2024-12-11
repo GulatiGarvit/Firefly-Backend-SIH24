@@ -59,7 +59,6 @@ const getUsersInsideBuildingFromIncident = async (req, res) => {
 
 const getUsersAndIncidentInfo = async (req, res) => {
 	const userIds = req.body.users;
-	const incidentId = req.body.incident;
 
 	//for each userId, get user metadata
 	const users = await User.findAll({
@@ -67,10 +66,8 @@ const getUsersAndIncidentInfo = async (req, res) => {
 			id: userIds,
 		},
 	});
-	// get incident metadata
-	const incident = await IncidentService.getIncidentById(incidentId);
 
-	res.status(200).json({ users, incident });
+	res.status(200).json({ data: users });
 };
 
 module.exports = {
