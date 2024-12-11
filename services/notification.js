@@ -6,7 +6,7 @@ const sendNotification = async (token, data) => {
 		data: data,
 		token: token,
 	};
-	getMessaging
+	getMessaging()
 		.send(message)
 		.then((response) => {
 			console.log("Successfully sent message:", response);
