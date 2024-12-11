@@ -63,7 +63,7 @@ const getIncidentsForFireStation = async (req, res, next) => {
     const fire_station = req.fire_station;
     try {
         const incidents = await fire_station.getIncidents({
-            include : Firefighter
+            include: Firefighter,
         });
         return res.status(200).json({ data: incidents });
     } catch (e) {
@@ -93,7 +93,7 @@ const assignIncidentToFirefighter = async (req, res, next) => {
         }
         const firefighter = firefighters[0];
         const incidents = await fire_station.getIncidents({
-            where: { id: incidentId }
+            where: { id: incidentId },
         });
         const incident = incidents[0];
         if (!incident) {
@@ -101,6 +101,11 @@ const assignIncidentToFirefighter = async (req, res, next) => {
         }
         await incident.setFirefighter(firefighter);
         // await firefighter.setIncident(firefighter);
+        // Send notification
+        const data = {
+            gotNewIncident: "true",
+        };
+        await NotificationService.sendNotification(firefighter.fcmToken, data);
         return res
             .status(200)
             .json({ message: "Incident assigned to firefighter" });
