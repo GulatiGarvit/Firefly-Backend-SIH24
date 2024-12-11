@@ -15,7 +15,7 @@ const getAllNodesForBuilding = async (req, res, next) => {
     const buildingId = req.params.buildingId;
     const nodes = await NodeService.getAllNodesForBuilding(buildingId);
 
-    res.status(200).json({ nodes });
+    res.status(200).json({ data : nodes });
 };
 
 const createNodesInBulk = async (req, res, next) => {
