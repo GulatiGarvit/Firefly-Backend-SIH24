@@ -15,7 +15,7 @@ const createAlertForIncident = async (incident) => {
     // TODO: Formulate the message
     const data = {
         gotNewIncident: true,
-        incidentId: incident.id,
+        incidentId: incident.id.toString(),
     };
 
     // For each user in users send notif
