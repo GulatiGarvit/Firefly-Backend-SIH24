@@ -1,4 +1,4 @@
-const { FireStation } = require("../models/index");
+const { FireStation, Firefighter } = require("../models/index");
 const firebaseAdmin = require("../config/firebase");
 const NotificationService = require("../services/notification");
 
@@ -62,7 +62,9 @@ const updateFireStation = async (req, res, next) => {
 const getIncidentsForFireStation = async (req, res, next) => {
     const fire_station = req.fire_station;
     try {
-        const incidents = await fire_station.getIncidents();
+        const incidents = await fire_station.getIncidents({
+            include : Firefighter
+        });
         return res.status(200).json({ data: incidents });
     } catch (e) {
         next(e);
