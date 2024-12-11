@@ -25,18 +25,22 @@ const handleCaughtFire = async (nodeId, data) => {
 	}
 
 	// Create an incident
-	const newIncident = await IncidentService.createIncident(node, node.buildingId, data);
+	const newIncident = await IncidentService.createIncident(
+		node,
+		node.buildingId,
+		data
+	);
 
 	await db
 		.ref(`Incidents/${newIncident.id}/Nodes/FireNodes/${nodeId}`)
 		.set(true);
 
 	// Alert all users in the background
-	UserService.createAlertForIncident(newIncident);
+	await UserService.createAlertForIncident(newIncident);
 
 	// Alert firestations in the background
-	FireStationService.createAlertForIncident(newIncident);
-    return newIncident;
+	await FireStationService.createAlertForIncident(newIncident);
+	return newIncident;
 };
 
 const getAllNodesForBuilding = async (buildingId) => {
