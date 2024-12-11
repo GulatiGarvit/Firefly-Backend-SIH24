@@ -1,5 +1,5 @@
 const NodeService = require("../services/node");
-
+const firebaseAdmin = require("../config/firebase");
 const handleCaughtFire = async (req, res, next) => {
 	// Get node id
 	const nodeId = req.body.id;
@@ -15,7 +15,7 @@ const getAllNodesForBuilding = async (req, res, next) => {
 	const buildingId = req.params.buildingId;
 	const nodes = await NodeService.getAllNodesForBuilding(buildingId);
 
-    res.status(200).json({ data : nodes });
+	res.status(200).json({ data: nodes });
 };
 
 const createNodesInBulk = async (req, res, next) => {
