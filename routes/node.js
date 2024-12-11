@@ -7,4 +7,6 @@ router.get("/", NodeController.getAllNodesForBuilding);
 
 router.post("/bulk", NodeController.createNodesInBulk);
 
+router.post("/data", NodeController.handleData);
+
 module.exports = router;
