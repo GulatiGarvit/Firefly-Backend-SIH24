@@ -90,9 +90,10 @@ const assignIncidentToFirefighter = async (req, res, next) => {
             return res.status(404).json({ message: "Firefighter not found" });
         }
         const firefighter = firefighters[0];
-        const incident = await fire_station.getIncidents({
+        const incidents = await fire_station.getIncidents({
             where: { id: incidentId }
         });
+        const incident = incidents[0];
         if (!incident) {
             return res.status(404).json({ message: "Incident not found" });
         }
