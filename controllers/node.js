@@ -3,6 +3,7 @@ const firebaseAdmin = require("../config/firebase");
 const handleCaughtFire = async (req, res, next) => {
 	// Get node id
 	const nodeId = req.body.id;
+	console.log(nodeId);
 	// TODO: Get other data
 	const data = {};
 
