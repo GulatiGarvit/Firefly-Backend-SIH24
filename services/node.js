@@ -21,6 +21,17 @@ const handleCaughtFire = async (nodeId, data) => {
 		await db
 			.ref(`Incidents/${incident.id}/Nodes/FireNodes/${nodeId}`)
 			.set(true);
+		await fetch("https://sih-nav.onrender.com/route_all/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				incidentId: incident.id,
+				mode: "exit"
+			}),
+		});
+
 		return incident;
 	}
 
