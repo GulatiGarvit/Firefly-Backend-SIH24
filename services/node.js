@@ -27,7 +27,7 @@ const handleCaughtFire = async (nodeId, data) => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
-				incidentId: incident.id,
+				incident_id: incident.id,
 				mode: "exit"
 			}),
 		});
