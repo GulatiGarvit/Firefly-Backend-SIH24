@@ -17,8 +17,8 @@ const getUser = async (req, res) => {
 const registerUser = async (req, res, next) => {
     // If this controller is called, the user does not exit
     // Use this function to register the user
-    const { name, age, medicalConditions, fcmToken } = req.body;
-    if (!name || !age) {
+    const { name, age, gender, medicalConditions, fcmToken } = req.body;
+    if (!name || !age || !gender) {
         return res.status(400).json({ message: "Name and age are required" });
     }
     var uid;
@@ -36,6 +36,7 @@ const registerUser = async (req, res, next) => {
             id: uid,
             name,
             age,
+            gender,
             medicalConditions,
             fcmToken,
         });
