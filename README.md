@@ -23,12 +23,12 @@ Firefly consists of multiple components, each handled in separate repositories:
 
 - 📱 **[Firefly Mobile App](#)** – Flutter-based app for occupants' evacuation guidance.
 - 💻 **[Firestation & Firefighter Portal](#)** - React and Typescript based web-portal, showing occupants' live location and navigation feed.
-- 🤖 **[Firefly Hardware (Arduino)](#)** – Code for fire sensors and BLE-based localization.
-- 🗺 **[Firefly Navigation (Python)](#)** – AI-based path planning for safe evacuation.
+- 🤖 **[Firefly Hardware (Arduino)](#)** – Code for fire sensors and BLE transmission.
+- 🗺 **[Firefly Navigation (Python)](#)** – Path planning for safe evacuation, fire spread prediction using Cellular Automaton.
 
 ## 🏗 Backend Tech Stack
-- **Node.js** (Express.js) – API Server 🚀
-- **MySQL** – Database for storing user, fire, and location data 🗄️
+- **Node.js** (Express.js) – API Server
+- **MySQL** – Database for storing user, fire, and location data 
 - **Sequelize**  Object Relational Mapping, to convert MySQL data into javascript objects
 
 ## 🔧 Installation & Setup (Backend)
@@ -48,12 +48,12 @@ npm start
 ## 🎖 Contributors
 A huge shout-out to the amazing **Escape Character team** who made this possible! 🚀
 
-- **Garvit Gulati** (**Team Lead**, Flutter, Hardware) 🛠️
-- **Ishita** (Backend) 🎨
-- **Parth Kapoor** (Full-stack, Firefighter/Firestation Portal) 🔧
-- **Rehan Bansal** (Frontend, Firefighter/Firestation Portal) 🧠
-- **Keshav Singla** (Navigation and Spread Prediction) 📡
-- **Archit Dhagat** (Research and Documentation) 📜
+- **Garvit Gulati** (**Team Lead**, Flutter, Hardware) 
+- **Ishita** (Backend)
+- **Parth Kapoor** (Full-stack, Firefighter/Firestation Portal)
+- **Rehan Bansal** (Frontend, Firefighter/Firestation Portal)
+- **Keshav Singla** (Navigation and Spread Prediction)
+- **Archit Dhagat** (Research and Documentation)
 
 ## 📬 Contact & Feedback
 We'd love to hear from you! Feel free to **open an issue** or contribute to this project.
