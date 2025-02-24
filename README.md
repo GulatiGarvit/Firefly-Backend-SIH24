@@ -21,10 +21,10 @@ During fire emergencies, traditional evacuation systems rely on static exit rout
 ## 📂 Project Repositories
 Firefly consists of multiple components, each handled in separate repositories:
 
-- 📱 **[Firefly Mobile App](#)** – Flutter-based app for occupants' evacuation guidance.
+- 📱 **[Firefly Mobile App](https://github.com/GulatiGarvit/Firefly-SIH-App)** – Flutter-based app for occupants' evacuation guidance.
 - 💻 **[Firestation & Firefighter Portal](#)** - React and Typescript based web-portal, showing occupants' live location and navigation feed.
-- 🤖 **[Firefly Hardware (Arduino)](#)** – Code for fire sensors and BLE transmission.
-- 🗺 **[Firefly Navigation (Python)](#)** – Path planning for safe evacuation, fire spread prediction using Cellular Automaton.
+- 🤖 **[Firefly Hardware (Arduino)](https://github.com/GulatiGarvit/Firefly-SIH-ESP/tree/main)** – Code for fire sensors and BLE transmission.
+- 🗺 **[Firefly Navigation (Python)](https://github.com/timetooth/SIH-nav)** – Path planning for safe evacuation, fire spread prediction using Cellular Automaton.
 
 ## 🏗 Backend Tech Stack
 - **Node.js** (Express.js) – API Server
